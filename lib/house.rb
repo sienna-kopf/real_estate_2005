@@ -2,13 +2,15 @@ class House
   attr_reader :price,
               :address,
               :rooms,
-              :categorical_rooms
+              :categorical_rooms,
+              :total_area
 
   def initialize(price, address)
     @price = price.delete_prefix("$").to_i
     @address = address
     @rooms = []
     @categorical_rooms = []
+    @total_area = 0
   end
 
   def add_room(room)
@@ -24,6 +26,20 @@ class House
     @categorical_rooms = rooms.select do |room|
       room.category == category
     end
+  end
+
+  def area
+    rooms.each do |room|
+      @total_area += room.area
+    end
+    @total_area
+  end
+
+  def details
+    house_details = {
+      "price" => price,
+      "address" => address
+    }
   end
 
 end
