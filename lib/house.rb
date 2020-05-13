@@ -13,4 +13,9 @@ class House
     @rooms << room
   end
 
+  def above_market_average?
+    return true if price > 500000
+    false
+  end 
+
 end
