@@ -1,12 +1,16 @@
-class Rom
+class Room
+  attr_reader :category,
+              :length,
+              :width
+
 
   def initialize(category, length, width)
     @category = category
-    @length = 10
+    @length = length
     @width = width
   end
 
   def area
-    @length * @width
+    @length * @width.to_i
   end
 end
