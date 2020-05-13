@@ -46,7 +46,46 @@ class House
   end
 
   def rooms_sorted_by_area
-    rooms_by_category = @rooms.sort_by {|room| room.area}.reverse!
+    rooms_by_area = @rooms.sort_by {|room| room.area}.reverse!
   end
+
+  def rooms_by_category
+    rooms_by_category = Hash.new
+
+    room_keys = rooms.map do |room|
+      rooms_by_category.keys << room.category
+    end
+
+    room_keys = room_keys.flatten!.uniq
+
+    rooms.each do |room|
+      room_keys.each do |key|
+        if room.category == key
+          rooms_by_category[key] = room
+        end
+      end
+    end
+
+    # rooms_by_category.each_value do |_, room_category|
+    #   rooms_by_category[room_category].to_a
+    # end
+
+    rooms_by_category
+
+    # rooms_by_category = Hash.new{|hsh, key| hsh[key] = []}
+    #
+    #
+    #
+    # # rooms_by_category.each do |categories, rooms|
+    # #   rooms.each do |room|
+    # #     if room.category == categories
+    # #       rooms_by_category.push "room"
+    # #     end
+    # #   end
+    # # end
+    # #
+    # # rooms_by_category
+  end
+
 
 end
